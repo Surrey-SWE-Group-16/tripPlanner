@@ -54,7 +54,9 @@ ROOT_URLCONF = 'travelbuddy.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [
+            BASE_DIR / 'travelbuddy/templates',
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
