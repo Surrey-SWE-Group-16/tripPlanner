@@ -7,4 +7,4 @@ def test(request):
 
 
 def index(request):
-    return render(request, "base.html")
+    return render(request, "testlogin.html")
