@@ -12,3 +12,9 @@ def index(request):
 
 def home(request):
     return render(request, "homepage.html")
+
+def privacy(request):
+    return render(request, "privacy.html")
+
+def contactus(request):
+    return render(request, "contactus.html")
