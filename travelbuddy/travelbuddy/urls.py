@@ -22,6 +22,6 @@ urlpatterns = [
     path('test/', test),
     path('login/', index),
     path('privacy/', privacy),
-    path('contactus/', contactus),
+    path('contactus/', contactus, name="contactus"),
     path('', home),
 ]
