@@ -19,9 +19,9 @@ from .views import test, index, home, privacy, contactus
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('test/', test),
-    path('login/', index),
-    path('privacy/', privacy),
+    path('test/', test, name="test"),
+    path('login/', index,name="login"),
+    path('privacy/', privacy, name="privacy"),
     path('contactus/', contactus, name="contactus"),
-    path('', home),
+    path('', home, name=""),
 ]
