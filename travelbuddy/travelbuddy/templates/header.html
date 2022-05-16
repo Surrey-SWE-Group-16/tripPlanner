@@ -1,39 +1,70 @@
 {% extends "base.html" %}
 
 {% block body-content %}
+
+<style>
+.container {
+  display: inline-block;
+  cursor: pointer;
+  align: right;
+  margin-top: 10px;
+  position: relative;
+
+}
+.nav navbar-nav navbar-right{
+   align: right;
+   margin-left: 30%
+}
+
+.bar1, .bar2, .bar3 {
+  width: 35px;
+  height: 5px;
+  background-color: #333;
+  margin: 6px 0;
+  transition: 0.4s;
+}
+
+.change .bar1 {
+  -webkit-transform: rotate(-45deg) translate(-9px, 6px);
+  transform: rotate(-45deg) translate(-9px, 6px);
+}
+
+.change .bar2 {opacity: 0;}
+
+.change .bar3 {
+  -webkit-transform: rotate(45deg) translate(-8px, -8px);
+  transform: rotate(45deg) translate(-8px, -8px);
+}
+</style>
+
+
     <nav class="navbar navbar-default">
         <div class="container-fluid">
             <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
-                        data-target="#bs-example-navbar-collapse-1">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="{% url '' %}">TravelBuddy</a>
+                <a class="navbar-brand" href="{% url '' %}"><span class="glyphicon glyphicon-home"></span></a>
             </div>
-
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav">
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Plan
-                            <span class="caret"></span></a>
-                        <ul class="dropdown-menu" role="menu">
-                            <li><a href="{% url 'login' %}">Planner</a></li>
-                            <li><a href="{% url 'login' %}">Trip History</a></li>
-                            <li class="divider"></li>
-                            <li><a href="{% url 'login' %}">Options</a></li>
-                            <li><a href="{% url 'contactus' %}">Contact Us</a></li>
-                            <li><a href="{% url 'privacy' %}">Privacy</a></li>
-                        </ul>
-                    </li>
-                </ul>
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="{% url 'login' %}">Log in</a></li>
-                    <li><a href="{% url 'register' %}">Register</a></li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'register' %}"><span class="glyphicon glyphicon-user"></span> Sign up</a>
+                    </li>
+                    <li>
+                        <a class="nav-link" href="{% url 'login' %}"><span class="glyphicon glyphicon-log-in "></span> Login</a>
+                    </li>
+                    <li class="container" onclick="myFunction(this)">
+                        <p class="bar1"></p>
+                        <p class="bar2"></p>
+                        <p class="bar3"></p>
+                    </li>
                 </ul>
             </div>
         </div>
     </nav>
+
+<script>
+function myFunction(x) {
+  x.classList.toggle("change");
+}
+</script>
+
 {% endblock %}
