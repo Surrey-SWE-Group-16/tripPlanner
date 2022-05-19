@@ -1,5 +1,5 @@
 from django.shortcuts import render
-import requests
+# import requests
 from .models import City
 from .forms import CityForm
 
