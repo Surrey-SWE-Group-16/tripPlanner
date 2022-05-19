@@ -20,11 +20,12 @@ from .views import register, login, home, privacy, contactus, user
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('register/', register, name="register"),
-    # path('login/', include('login.urls')),
+    path('login/', login, name="login"),
     path('privacy/', privacy, name="privacy"),
     path('contactus/', contactus, name="contactus"),
     path('User/', user, name="user"),
     path('', home, name=""),
     path('', include('blog.urls')),
+    path('weather/', include('weather.urls')),
     path('', include('users.urls')),
 ]
