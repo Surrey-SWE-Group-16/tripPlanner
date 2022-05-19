@@ -12,7 +12,7 @@ def register(request):
     return render(request, "register.html")
 
 def login(request):
-    return render(request, "login.html")
+    return render(request, "users/login.html")
 
 def contactus(request):
     return render(request, "contactus.html")

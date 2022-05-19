@@ -12,6 +12,7 @@ def index(request):
             instance = form.save(commit=False)
             instance.author = request.user
             instance.save()
+            # blog url in blog urls
             return redirect('blog-index')
     else:
         form = PostModelForm()
