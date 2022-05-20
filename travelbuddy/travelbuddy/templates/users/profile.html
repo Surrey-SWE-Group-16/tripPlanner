@@ -20,11 +20,12 @@
                     <hr>
                     <div class="row">
                         <div class="col-md-4">
-                            <img src="" alt="profile-img">
+                            <img class="img-thumbnail" src="{{ user.profilemodel.image.url }}" alt="profile-img">
                         </div>
                         <div class="col-md-8">
-                            <h4>Name: Seoeun</h4>
-                            <h4>Email: seoeun@gmail.com</h4>
+<!--                            render data with double curly bracket -->
+                            <h4>Name: {{ user.username }}</h4>
+                            <h4>Email: {{user.email}}</h4>
                         </div>
                     </div>
 
@@ -46,12 +47,22 @@
         </button>
       </div>
       <div class="modal-body">
-        ...
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Cancel</button>
-        <button type="button" class="btn btn-primary btn-sm">Save</button>
-      </div>
+        <div class="row">
+            <div class="col-md-4">
+                <img class="img-thumbnail" src="{{ user.profilemodel.image.url }}" alt="">
+            </div>
+            <div class="col-md-8">
+                <form method="POST" enctype="multipart/form-data">
+                   {% csrf_token %}
+                    {{ u_form|crispy }}
+                    {{ p_form|crispy }}
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Cancel</button>
+                            <button type="submit" class="btn btn-primary btn-sm">Save</button>
+                          </div>
+                </form>
+            </div>
+        </div>
     </div>
   </div>
 </div>
