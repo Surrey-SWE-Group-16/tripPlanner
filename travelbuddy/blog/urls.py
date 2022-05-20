@@ -6,4 +6,5 @@ urlpatterns = [
     path('post_detail/<int:pk>/', views.post_detail, name='blog-post-detail'),
     path('post_edit/<int:pk>/', views.post_edit, name='blog-post-edit'), # function create in views
     path('post_delete/<int:pk>/', views.post_delete, name='blog-post-delete'),
+    path('comment_delete/<int:pk>/', views.comment_delete, name='blog-comment-delete'),
 ]

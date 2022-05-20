@@ -9,8 +9,25 @@ class PostModel(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE) # whenever a user is deleted, deletes everything related to that user
     date_created = models.DateTimeField(auto_now_add=True)
 
+# Order from the newest to oldest
     class Meta:
         ordering = ('-date_created',)
 
+# comment count
+    def comment_number(self):
+        return self.comment_set.all().count()  # set is a function
+
+    def comments(self):
+        return self.comment_set.all()
+
     def __str__(self):
         return self.title
+
+
+class Comment(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    post = models.ForeignKey(PostModel, on_delete=models.CASCADE)
+    content = models.CharField(max_length=255)
+
+    def __str__(self):
+        return self.content
