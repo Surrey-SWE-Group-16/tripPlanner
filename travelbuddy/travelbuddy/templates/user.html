@@ -2,6 +2,9 @@
 
     {% block content %}
 <head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+     {% load static %}
+  <script src="{% static 'map_func.js' %}"></script>
 
     <style>
         /* Always set the map height explicitly to define the size of the div
@@ -38,6 +41,7 @@
     <script>
     //Map variables
       var googleMapDiv;
+
 
       // Runs when the page is loaded and
       // loads the Google Maps Control onto the page
@@ -140,6 +144,8 @@
 
       }
 
+
+
     </script>
 </head>
 
@@ -152,21 +158,47 @@
       <!--Adds the Google Maps ma-->
       <h1>Google Maps</h1>
       <div id="googledivMap"></div>
-
+      <input type="text" placeholder="Origin" id="origin" name="autocomplete"/>
+        <button type="button" onclick="get_loc()"></button>
     </div>
-
+    <div class="column">
+        <div class="media-content">
+            <div class="content">
+                <p>
+                    <span class="title" id="weather_title"> </span>
+                    <br>
+                    <span class="subtitle" id="weather_sub_title">° F</span>
+                    <br> {{ weather.description }}
+                </p>
+            </div>
+        </div>
+    </div>
   </div>
 
    <!---------------------------------------------------------------All sources------------------------------------------------------------------------------------->
 
 
     <!--The script to the Google Maps Map API-->
+
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD-AwK--sipbS9CBgDr9ipgUqvuYyk0tas&callback=initMap"
     async defer></script>
-    
+<!--    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD-AwK&#45;&#45;sipbS9CBgDr9ipgUqvuYyk0tas&callback=initAutocomplete&libraries=places&v=weekly"-->
+<!--    async defer></script>-->
+
+
    <!-------------------------------------------------------------------------------------------------------------------------------------------------------------->
 
 
 </body>
     {% endblock %}
     {% include "footer.html" %}
+
+
+
+<!-- function get_api() {-->
+<!--        mounted() {-->
+<!--            new google.maps.places.Autocomplete()-->
+<!--            document.getElementById("autocomplete")-->
+<!--        }-->
+
+<!--       }-->

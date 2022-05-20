@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from .views import register, login, home, privacy, contactus, user
+from .views import register, login, home, privacy, contactus, user, get_maps, weather_api
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -28,4 +28,6 @@ urlpatterns = [
     path('', include('blog.urls')),
     path('weather/', include('weather.urls')),
     path('', include('users.urls')),
+    path("ajax/get_maps/", get_maps, name='get_maps'),
+    path("ajax/weather_api/", weather_api, name='weather_api')
 ]
