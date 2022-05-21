@@ -133,12 +133,14 @@ MEDIA_ROOT = (BASE_DIR / 'media')
 STATIC_ROOT = (BASE_DIR / 'asset')
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'anytimelse98@gmail.com'
+EMAIL_HOST_USER = 'travelbuddy420420@gmail.com'
+DEFAULT_FROM_EMAIL = "travelbuddy420420@gmail.com"
 # EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_PASSWORD')
-EMAIL_HOST_PASSWORD = ""
-EMAIL_HOST= 587
-EMAIL_HOST_TLS = True
+EMAIL_HOST_PASSWORD = "afrvwkiidvfzxknl"
+EMAIL_PORT= 587
+EMAIL_USE_TLS = True
 
 STATICFILES_DIRS = [
     BASE_DIR / 'STATIC'
