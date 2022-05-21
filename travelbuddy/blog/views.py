@@ -1,9 +1,11 @@
 from django.shortcuts import render, redirect
 from .models import PostModel, Comment
 from .forms import PostModelForm, PostUpdateForm, CommentForm
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
-
+# blog can only be viewed when logged in
+@login_required
 # Creating post
 def index(request):
     posts = PostModel.objects.all()
@@ -25,7 +27,8 @@ def index(request):
 
     return render(request, 'blog/index.html', context)
 
-
+# post detail can only be viewed when logged in
+@login_required
 # pk for primary key
 def post_detail(request, pk):
     post = PostModel.objects.get(id=pk)
@@ -45,7 +48,8 @@ def post_detail(request, pk):
     }
     return render(request, 'blog/post_detail.html', context)
 
-
+# post can only be edited when logged in
+@login_required
 def post_edit(request, pk):
     # grab post
     post = PostModel.objects.get(id=pk)
@@ -62,7 +66,8 @@ def post_edit(request, pk):
     }
     return render(request, 'blog/post_edit.html', context)
 
-
+# post can only be deleted when logged in
+@login_required
 def post_delete(request, pk):
     post = PostModel.objects.get(id=pk)
     if request.method == 'POST':
