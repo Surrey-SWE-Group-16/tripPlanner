@@ -78,7 +78,8 @@ def post_delete(request, pk):
     }
     return render(request, 'blog/post_delete.html', context)
 
-
+# comment can only be deleted when logged in
+@login_required
 def comment_delete(request, pk):
     comment = Comment.objects.get(id=pk)
     if request.method == 'POST':

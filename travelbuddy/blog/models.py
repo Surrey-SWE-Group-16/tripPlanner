@@ -1,19 +1,20 @@
 from django.db import models
 from django.contrib.auth.models import User
 
+
 # Create your models here.
 class PostModel(models.Model):
-
     title = models.CharField(max_length=100)
     content = models.TextField()
-    author = models.ForeignKey(User, on_delete=models.CASCADE) # whenever a user is deleted, deletes everything related to that user
+    author = models.ForeignKey(User,
+                               on_delete=models.CASCADE)  # whenever a user is deleted, deletes everything related to that user
     date_created = models.DateTimeField(auto_now_add=True)
 
-# Order from the newest to oldest
+    # Order from the newest to oldest
     class Meta:
         ordering = ('-date_created',)
 
-# comment count
+    # comment count
     def comment_number(self):
         return self.comment_set.all().count()  # set is a function
 
