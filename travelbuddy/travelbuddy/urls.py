@@ -23,11 +23,10 @@ urlpatterns = [
     path('login/', login, name="login"),
     path('privacy/', privacy, name="privacy"),
     path('contactus/', contactus, name="contactus"),
-    path('User/', user, name="user"),
     path('', home, name=""),
     path('', include('blog.urls')),
-    path('weather/', include('weather.urls')),
     path('', include('users.urls')),
+    path('', include('map_main.urls')),
     path("ajax/get_maps/", get_maps, name='get_maps'),
     path("ajax/weather_api/", weather_api, name='weather_api')
 ]

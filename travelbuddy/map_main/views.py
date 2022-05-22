@@ -4,26 +4,9 @@ from django.http import JsonResponse
 import requests
 
 
-# Create your views here.
-
-
-def home(request):
-    return render(request, "homepage.html")
-
-def register(request):
-    return render(request, "register.html")
-
-def login(request):
-    return render(request, "users/login.html")
-
-def contactus(request):
-    return render(request, "contactus.html")
-
 def user(request):
-    return render(request, "user.html")
+    return render(request, "map_main/user.html")
 
-def privacy(request):
-    return render(request, "privacy.html")
 
 def get_maps(request):
     loc = request.GET.get('location')
@@ -38,6 +21,9 @@ def get_maps(request):
         print(r.json())
         return JsonResponse(r.json())
     return JsonResponse(r.json())
+# Create your views here.
+
+
 def weather_api(request):
     lo = request.GET.get('longitude')
     la = request.GET.get('latitude')

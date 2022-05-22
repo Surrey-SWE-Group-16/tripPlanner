@@ -1,0 +1,184 @@
+    {% extends "base.html" %}
+
+    {% block content %}
+    <head xmlns="http://www.w3.org/1999/html" xmlns="">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"></script >
+     {% load static %}
+
+
+    <style>
+        /* Always set the map height explicitly to define the size of the div
+         * element that contains the map. */
+       #googledivMap {
+          height: 70%;
+          width: 90%;
+          margin-left:4%;
+           height: 350px;
+
+       }
+        /* Optional: Makes the sample page fill the window. */
+        html, body {
+          height: 100%;
+          margin: 0;
+          padding: 0;
+        }
+        body {
+          background-color:#24292e;
+        }
+        .column {
+          float: left;
+          width: 33.33%;
+          padding: 0px;
+        }
+        .row:after {
+          content: "";
+          display: table;
+          clear: both;
+        }
+        .add_trip {
+            border: none;
+            color: white;
+            padding: 40px 70px;
+            text-align: center;
+            font-size: 16px;
+            margin-left:46%;
+            margin-top:2%;
+            margin-bottom:3%;
+        }
+        .loc_but{
+            padding: 15px 30px;
+        }
+
+   </style>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            var maxField = 10; //Input fields increment limitation
+            var addButton = $('.add_button'); //Add button selector
+            var wrapper = $('.field_wrapper'); //Input field wrapper
+<!--        var fieldHTML = '<div><input type="text" placeholder="Stop" id="stop" name="field_name[]" value=""/><a href="javascript:void(0);" class="remove_button"><img src="remove-icon.png"/></a></div>'; //New input field html-->
+            var x = 1; //Initial field counter is 1
+
+
+            //Once add button is clicked
+            $(addButton).click(function(){
+                //Check maximum number of input fields
+                if(x < maxField){
+                    x++; //Increment field counter
+                    $(wrapper).append('<div><input type="text" class="stop" placeholder="Stop" id="'+ x +'" name="field_name[]" value=""/><a href="javascript:void(0);" class="remove_button"><img src="remove-icon.png"/></a></div>'); //Add field html
+                }
+            });
+
+            //Once remove button is clicked
+            $(wrapper).on('click', '.remove_button', function(e){
+                e.preventDefault();
+                console.log($(this).parent('div'))
+                $(this).parent('div').remove(); //Remove field html
+                x--; //Decrement field counter
+            });
+        });
+    </script>
+</head>
+
+
+    <body>
+
+      <div class="row">
+
+      </div>
+      <div class="row">
+        <div class="column" align="center" >
+              <!--Adds the Google Maps ma-->
+
+              <div id="googledivMap"></div>
+        </div>
+        <div class="column">
+            <div class="row">
+                <div class="media-content">
+                    <div class="content">
+                        <p>
+                            <span class="title" id="weather_title"></span>
+                            <br>
+                            <span class="subtitle" id="weather_sub_title"></span>
+                            <br>
+                            <span class="title" id="discrip"></span>
+                            <br>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="media-content">
+                    <div class="content">
+                        <p>
+                            <span class="title" id="weather_title2"></span>
+                            <br>
+                            <span class="subtitle" id="weather_sub_title2"></span>
+                            <br>
+                            <span class="title" id="discrip2"></span>
+                            <br>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+      </div>
+      <div class="row" style="text-align: center">
+        <div class="media-content">
+            <div class="content">
+                <p>
+                     <div class="field_wrapper">
+                        <div>
+                            <input type="text" placeholder="Origin" id="origin" name="autocomplete"/>
+                            <a href="javascript:void(0);" class="add_button" title="Add field"><img src="add-icon.png"/></a>
+                        </div>
+                     </div>
+                     <br>
+                     <input type="text" placeholder="Destination" id="end" name="autocomplete"/>
+                     <br>
+                     <button type="button" class="loc_but" onclick="get_loc_org(); get_loc_dest();"></button>
+                    <br>
+                </p>
+            </div>
+        </div>
+      </div>
+      <div class="row">
+          <div class="content-box-wrapper" style="height: 400px;width:90%; background:white ;margin-left: 5%">
+              <input type="text" placeholder="CheckBoxe's Name" id="check-name" name="check-name"/>
+              <button type="button" onclick="add_check();"></button>
+              <i class="fa-regular fa-xmark"></i>
+
+          </div>
+      </div>
+
+      <div class="row">
+          <textarea id="text" spellcheck="false" style="height:400px; width:90%; margin-left:5%; margin-top:2%;"></textarea>
+      </div>
+
+      <div class="row">
+          <div class="button-center">
+                <button type="button" class="add_trip" onclick="";></button>
+          </div>
+      </div>
+
+
+       <!---------------------------------------------------------------All sources------------------------------------------------------------------------------------->
+
+
+        <!--The script to the Google Maps Map API-->
+        <script src="{% static 'map_func.js' %}"></script>
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD-AwK--sipbS9CBgDr9ipgUqvuYyk0tas"
+        async defer></script>
+
+    </body>
+
+
+
+       <!-------------------------------------------------------------------------------------------------------------------------------------------------------------->
+
+
+
+    {% endblock %}
+    {% include "footer.html" %}
+
+
