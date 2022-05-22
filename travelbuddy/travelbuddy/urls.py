@@ -15,12 +15,14 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from .views import register, login, home, privacy, contactus, user, get_maps, weather_api
+from django.conf import settings
+from django.conf.urls.static import static
+from .views import register, home, privacy, contactus, user, get_maps, weather_api
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('register/', register, name="register"),
-    path('login/', login, name="login"),
+    # path('login/', login, name="login"),
     path('privacy/', privacy, name="privacy"),
     path('contactus/', contactus, name="contactus"),
     path('', home, name=""),
@@ -30,3 +32,6 @@ urlpatterns = [
     path("ajax/get_maps/", get_maps, name='get_maps'),
     path("ajax/weather_api/", weather_api, name='weather_api')
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
