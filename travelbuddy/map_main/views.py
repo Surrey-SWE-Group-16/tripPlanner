@@ -1,10 +1,35 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.http import JsonResponse
+from .models import MapModel
+from .forms import MapModelForm
+from django.contrib.auth.decorators import login_required
 import requests
 
 
-def user(request):
+def user_map(request):
+    # print(MapModelForm.)
+    # map_mod = MapModelForm.objects.all()
+    # print("daefefeafafe")
+    if request.method == 'POST':
+        form = MapModelForm(request.POST)
+        print(form)
+        if form.is_valid():
+            instance = form.save(commit=False)
+            # request.user=logged in user
+
+            instance.author = request.user
+            instance.save()
+            # blog url in blog urls
+            return redirect('blog-index')
+    else:
+        return render(request, "map_main/user.html")
+    #     form = MapModelForm()
+    # context = {
+    #     'posts': map_mod,
+    #     'form': form,
+    #
+    # }
     return render(request, "map_main/user.html")
 
 
@@ -38,3 +63,27 @@ def weather_api(request):
         print(r.json())
         return JsonResponse(r.json())
     return JsonResponse(r.json())
+
+
+@login_required
+# Creating post
+def location(request):
+    points = MapModel.objects.all()
+    if request.method == 'POST':
+        form = MapModelForm(request.POST)
+        if form.is_valid():
+            instance = form.save(commit=False)
+            # request.user=logged in user
+            instance.user = request.user
+            instance.save()
+            # blog url in blog urls
+            return redirect('location')
+    else:
+        form = MapModelForm()
+    context = {
+        'points': points,
+        'form': form,
+    }
+
+    return render(request, 'planner/location.html', context)
+

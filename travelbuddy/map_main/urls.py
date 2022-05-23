@@ -1,11 +1,11 @@
 from django.contrib import admin
 from django.urls import path, include
-from .views import user, get_maps, weather_api
-from django.contrib.auth import views as auth_view
+from .views import user_map, get_maps, weather_api
+from .import views
 
 
 urlpatterns = [
 
-    path('User/', auth_view.LogoutView.as_view(template_name='map_main/user.html'), name="user-map"),
+    path('User/', views.user_map, name="user_map"),
 
 ]

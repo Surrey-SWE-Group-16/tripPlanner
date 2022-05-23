@@ -1,10 +1,7 @@
-from django.shortcuts import render
 from django.http import HttpResponse
 from django.http import JsonResponse
 import requests
 from django.shortcuts import render, redirect
-from .models import MapModel, ChecklistModel, JournalModel
-from .forms import MapModelForm, ChecklistModelForm, JournalModelForm
 from django.contrib.auth.decorators import login_required
 
 """
@@ -64,27 +61,6 @@ Isak and Adrian's code end
 """
 
 # Map location can only be viewed when logged in
-@login_required
-# Creating post
-def location(request):
-    points = MapModel.objects.all()
-    if request.method == 'POST':
-        form = MapModelForm(request.POST)
-        if form.is_valid():
-            instance = form.save(commit=False)
-            # request.user=logged in user
-            instance.user = request.user
-            instance.save()
-            # blog url in blog urls
-            return redirect('location')
-    else:
-        form = MapModelForm()
-    context = {
-        'points': points,
-        'form': form,
-    }
-
-    return render(request, 'planner/location.html', context)
 
 # Map detail can only be viewed when logged in
 # @login_required

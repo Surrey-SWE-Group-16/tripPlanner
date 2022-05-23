@@ -1,5 +1,5 @@
     {% extends "base.html" %}
-
+    {% load crispy_forms_tags %}
     {% block content %}
     <head xmlns="http://www.w3.org/1999/html" xmlns="">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
@@ -82,85 +82,87 @@
 
 
     <body>
+         <form method="post">
+              <div class="row">
+                  <input type="text" placeholder="Trip Title" id="title" name="Title" style=""/>
+              </div>
+              <div class="row">
+                <div class="column" align="center" >
+                      <!--Adds the Google Maps ma-->
 
-      <div class="row">
-
-      </div>
-      <div class="row">
-        <div class="column" align="center" >
-              <!--Adds the Google Maps ma-->
-
-              <div id="googledivMap"></div>
-        </div>
-        <div class="column">
-            <div class="row">
-                <div class="media-content">
-                    <div class="content">
-                        <p>
-                            <span class="title" id="weather_title"></span>
-                            <br>
-                            <span class="subtitle" id="weather_sub_title"></span>
-                            <br>
-                            <span class="title" id="discrip"></span>
-                            <br>
-                        </p>
-                    </div>
+                      <div id="googledivMap"></div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="media-content">
-                    <div class="content">
-                        <p>
-                            <span class="title" id="weather_title2"></span>
-                            <br>
-                            <span class="subtitle" id="weather_sub_title2"></span>
-                            <br>
-                            <span class="title" id="discrip2"></span>
-                            <br>
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-      </div>
-      <div class="row" style="text-align: center">
-        <div class="media-content">
-            <div class="content">
-                <p>
-                     <div class="field_wrapper">
-                        <div>
-                            <input type="text" placeholder="Origin" id="origin" name="autocomplete"/>
-                            <a href="javascript:void(0);" class="add_button" title="Add field"><img src="add-icon.png"/></a>
+                <div class="column">
+                    <div class="row">
+                        <div class="media-content">
+                            <div class="content">
+                                <p>
+                                    <span class="title" id="weather_title"></span>
+                                    <br>
+                                    <span class="subtitle" id="weather_sub_title"></span>
+                                    <br>
+                                    <span class="title" id="discrip"></span>
+                                    <br>
+                                </p>
+                            </div>
                         </div>
-                     </div>
-                     <br>
-                     <input type="text" placeholder="Destination" id="end" name="autocomplete"/>
-                     <br>
-                     <button type="button" class="loc_but" onclick="get_loc_org(); get_loc_dest();"></button>
-                    <br>
-                </p>
-            </div>
-        </div>
-      </div>
-      <div class="row">
-          <div class="content-box-wrapper" style="height: 400px;width:90%; background:white ;margin-left: 5%">
-              <input type="text" placeholder="CheckBoxe's Name" id="check-name" name="check-name"/>
-              <button type="button" onclick="add_check();"></button>
-              <i class="fa-regular fa-xmark"></i>
+                    </div>
+                    <div class="row">
+                        <div class="media-content">
+                            <div class="content">
+                                <p>
+                                    <span class="title" id="weather_title2"></span>
+                                    <br>
+                                    <span class="subtitle" id="weather_sub_title2"></span>
+                                    <br>
+                                    <span class="title" id="discrip2"></span>
+                                    <br>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+              </div>
+              <div class="row" style="text-align: center">
+                <div class="media-content">
+                    <div class="content">
+                        <p>
+                             <div class="field_wrapper">
+                                <div>
+                                    <input type="text" placeholder="Origin" id="origin" name="autocomplete"/>
+                                    <a href="javascript:void(0);" class="add_button" title="Add field"><img src="add-icon.png"/></a>
+                                </div>
+                             </div>
+                             <br>
+                             <input type="text" placeholder="Destination" id="end" name="autocomplete"/>
+                             <br>
+                             <button type="button" class="loc_but" onclick="get_loc_org(); get_loc_dest();"></button>
+                            <br>
+                        </p>
+                    </div>
+                </div>
+              </div>
+              <div class="row">
+                  <div class="content-box-wrapper" style="height: 400px;width:90%; background:white ;margin-left: 5%">
+                      <input type="text" placeholder="CheckBoxe's Name" id="check-name" name="check-name"/>
+                      <button type="button" onclick="add_check();"></button>
+                      <i class="fa-regular fa-xmark"></i>
 
-          </div>
-      </div>
+                  </div>
+              </div>
 
-      <div class="row">
-          <textarea id="text" spellcheck="false" style="height:400px; width:90%; margin-left:5%; margin-top:2%;"></textarea>
-      </div>
+              <div class="row">
+                  <textarea id="text" spellcheck="false" style="height:400px; width:90%; margin-left:5%; margin-top:2%;"></textarea>
+              </div>
 
-      <div class="row">
-          <div class="button-center">
-                <button type="button" class="add_trip" onclick="";></button>
-          </div>
-      </div>
-
+              <div class="row">
+                  <div class="button-center">
+                        {% csrf_token %}
+                        {{form|crispy}}
+                        <input class="btn btn-primary btn-block" type="submit" value="Post">
+                  </div>
+              </div>
+         </form>
 
        <!---------------------------------------------------------------All sources------------------------------------------------------------------------------------->
 

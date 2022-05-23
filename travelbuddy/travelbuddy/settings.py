@@ -50,9 +50,13 @@ INSTALLED_APPS = [
     'bootstrap_ui',
     'blog.apps.BlogConfig',
     'users.apps.UsersConfig',
+    'map_main.apps.MapMainConfig',
     'crispy_forms',
     'weather',
-    "corsheaders",
+    'corsheaders',
+    'travelbuddy',
+    #'map_main',
+
 
 ]
 
