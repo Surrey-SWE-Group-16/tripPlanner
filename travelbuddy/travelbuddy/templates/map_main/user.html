@@ -82,7 +82,7 @@
 
 
     <body>
-         <form method="post">
+         <form method="POST" action="{% url 'user_map' %}">
               <div class="row">
                   <input type="text" placeholder="Trip Title" id="title" name="Title" style=""/>
               </div>
@@ -162,6 +162,7 @@
                         <input class="btn btn-primary btn-block" type="submit" value="Post">
                   </div>
               </div>
+
          </form>
 
        <!---------------------------------------------------------------All sources------------------------------------------------------------------------------------->

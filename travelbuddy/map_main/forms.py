@@ -1,4 +1,5 @@
 from django import forms
+from django.forms import ModelForm
 from .models import MapModel
 
 
@@ -13,7 +14,7 @@ class MapModelForm(forms.ModelForm):
 
     class Meta:
         model = MapModel
-        fields = ['title', 'orig_loc', 'dest_loc', 'waypoints', 'check_item', 'journal']    # always need to add comma after the field esp when there's one field.
+        fields = ('title', 'orig_loc', 'dest_loc', 'waypoints', 'check_item', 'journal')    # always need to add comma after the field esp when there's one field.
 
 
 # class ChecklistModelForm(forms.ModelForm):

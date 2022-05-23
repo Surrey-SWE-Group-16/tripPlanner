@@ -10,10 +10,13 @@ import requests
 def user_map(request):
     # print(MapModelForm.)
     # map_mod = MapModelForm.objects.all()
-    # print("daefefeafafe")
+    # print("daefefeafaf
+
     if request.method == 'POST':
-        form = MapModelForm(request.POST)
-        print(form)
+        form = MapModelForm(request.POST, request.FILES )
+
+        print(request.POST)
+
         if form.is_valid():
             instance = form.save(commit=False)
             # request.user=logged in user
@@ -23,14 +26,17 @@ def user_map(request):
             # blog url in blog urls
             return redirect('blog-index')
     else:
-        return render(request, "map_main/user.html")
+        form = MapModelForm()
+
+
+
     #     form = MapModelForm()
     # context = {
     #     'posts': map_mod,
     #     'form': form,
     #
     # }
-    return render(request, "map_main/user.html")
+    return render(request, "map_main/user.html", {'form': form})
 
 
 def get_maps(request):
