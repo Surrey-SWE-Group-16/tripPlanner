@@ -14,6 +14,6 @@ class MapModel(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE)  # whenever a user is deleted, deletes everything related to that user
 
     def __str__(self):
-        return self.location_points
+        return (self.title)
 
 
