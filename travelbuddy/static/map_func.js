@@ -1,6 +1,9 @@
 var google = undefined;
 var googleMapDiv = undefined;
 var checkbox_counter = 1; //Initial field counter is 1
+var check_json = {}
+var directionsService
+var directionsRenderer
 
 window.onload = ()=>{
 google = window.google;
@@ -133,9 +136,9 @@ function weather_api(lo, la, address){
 
  function initMap() {
 
+          directionsService = new google.maps.DirectionsService();
+          directionsRenderer = new google.maps.DirectionsRenderer();
 
-          const directionsService = new google.maps.DirectionsService();
-          const directionsRenderer = new google.maps.DirectionsRenderer();
           // Google Maps element in whichlayers will be drawn with Google Maps Javascript API
           googleMapDiv = new google.maps.Map(document.getElementById('googledivMap') ,
           {
@@ -229,19 +232,40 @@ function weather_api(lo, la, address){
           });
 
           directionsRenderer.setMap(googleMapDiv);
-          const onChangeHandler = function () {
-            calculateAndDisplayRoute(directionsService, directionsRenderer);
-          };
+//          const onChangeHandler = function () {
+//            calculateAndDisplayRoute(directionsService, directionsRenderer);
+//          };
 
           (document.getElementById("origin")).addEventListener(
               "change",
-              onChangeHandler
+              ()=>{
+                document.getElementById("id_orig_loc").value = document.getElementById("origin").value
+              }
+
           );
 
           (document.getElementById("end")).addEventListener(
-            "change",
-            onChangeHandler
+                "change",
+                ()=>{
+                  document.getElementById("id_dest_loc").value = document.getElementById("end").value
+                }
+
           );
+
+          (document.getElementById("title")).addEventListener(
+              "change",
+              ()=>{
+                 document.getElementById("id_title").value = document.getElementById("title").value
+              }
+          );
+          (document.getElementById("text")).addEventListener(
+              "change",
+              ()=>{
+                 document.getElementById("id_journal").value = document.getElementById("text").value
+              }
+          );
+
+
 
  }
  function calculateAndDisplayRoute(directionsService,directionsRenderer){
@@ -276,7 +300,8 @@ function weather_api(lo, la, address){
 }
 function add_check(){
       //Check maximum number of input fields
-      $(".content-box-wrapper").append('<div id=""><input type="checkbox" name="check" id="'+checkbox_counter+'" value=""><label for="'+checkbox_counter+'" style="color: black;"> '+document.getElementById('check-name').value+'</label><a onclick="remove_check(this)" class="remove_button"><img src="remove-icon.png"/></a></div><br>'); //Add field html
+      $(".content-box-wrapper").append('<div id=""><input type="checkbox" name="check" id="'+checkbox_counter+'" onchange="fill_check(event)" value=""><label for="'+checkbox_counter+'" style="color: black;"> '+document.getElementById('check-name').value+'</label><a onclick="remove_check(this)" class="remove_button"><img src="remove-icon.png"/></a></div><br>'); //Add field html
+
       checkbox_counter++; //Increment field counter
 };
 
@@ -285,3 +310,40 @@ function remove_check(e){
         e.parentElement.remove(); //Remove field html
         checkbox_counter--; //Decrement field counter
 };
+function fill_loc(){
+//       document.getElementById("id_waypoints").value =   document.getElementById("2").value;
+         let string_stop = ""
+         let cnt = 0;
+         const waypoint = document.querySelectorAll(".stop");
+         if (waypoint){
+            waypoint.forEach(w => {
+                if (cnt == 0){
+                    string_stop = string_stop+w.value;
+                }
+                else{
+                    string_stop = string_stop+","+w.value;
+                }
+                cnt++;
+            });
+            document.getElementById("id_waypoints").value =  string_stop;
+            console.log(string_stop)
+         }
+         return
+
+};
+
+function fill_check(e){
+       let checkboxElem = e.target;
+       check_json[checkboxElem.id] = {"label": checkboxElem.nextElementSibling.textContent,"checked":checkboxElem.checked};
+       string_json = JSON.stringify(check_json)
+       document.getElementById("id_check_item").value =  string_json;
+};
+function fill_btn_check(){
+       check_json[checkbox_counter-1] = {"label": document.getElementById("check-name").value,"checked":false};
+       string_json = JSON.stringify(check_json)
+       document.getElementById("id_check_item").value =  string_json;
+};
+
+function call(){
+    calculateAndDisplayRoute(directionsService, directionsRenderer);
+}
