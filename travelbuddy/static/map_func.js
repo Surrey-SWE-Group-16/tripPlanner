@@ -26,14 +26,14 @@ function get_loc_org() {
         success: function( data )
         {
 
-            console.log("data is: ", data);
+
             la = data.results[0].geometry.location.lat;
             lo = data.results[0].geometry.location.lng;
             address = data.results[0].formatted_address;
             weather_api(lo,la, address);
         },
         error: function (request, status, error) {
-            console.log("data is: ", error);
+
         }
      })
 }
@@ -54,14 +54,14 @@ function get_loc_dest() {
         success: function( data )
         {
 
-            console.log("data is: ", data);
+
             la_dest = data.results[0].geometry.location.lat;
             lo_dest = data.results[0].geometry.location.lng;
             address_dest = data.results[0].formatted_address;
             weather_api_dest(lo_dest,la_dest, address_dest);
         },
         error: function (request, status, error) {
-            console.log("data is: ", error);
+
         }
      })
 }
@@ -92,10 +92,10 @@ function weather_api_dest(lo_dest, la_dest, address_dest){
 
 
 
-            console.log("data is: ", data);
+
         },
         error: function (request, status, error) {
-            console.log("data is: ", error);
+
         }
      })
 
@@ -125,10 +125,10 @@ function weather_api(lo, la, address){
 
 
 
-            console.log("data is: ", data);
+
         },
         error: function (request, status, error) {
-            console.log("data is: ", error);
+
         }
      })
 
@@ -239,6 +239,7 @@ function weather_api(lo, la, address){
           (document.getElementById("origin")).addEventListener(
               "change",
               ()=>{
+
                 document.getElementById("id_orig_loc").value = document.getElementById("origin").value
               }
 
@@ -247,6 +248,7 @@ function weather_api(lo, la, address){
           (document.getElementById("end")).addEventListener(
                 "change",
                 ()=>{
+
                   document.getElementById("id_dest_loc").value = document.getElementById("end").value
                 }
 
@@ -272,7 +274,7 @@ function weather_api(lo, la, address){
 
   const waypts = [];
   const elementList = document.querySelectorAll(".stop");
-  console.log("elem is ", elementList);
+
   elementList.forEach(e => {
         waypts.push({
             location: e.value,
@@ -280,7 +282,7 @@ function weather_api(lo, la, address){
         });
   });
 
-
+   console.log("map called!");
 
   directionsService
     .route({
@@ -295,8 +297,11 @@ function weather_api(lo, la, address){
     })
     .then((response) => {
       directionsRenderer.setDirections(response);
+      document.getElementById("id_distance").value = response.routes[0].legs[0].distance.value;
+
     })
     .catch((e) => window.alert("Directions request failed due to " + status));
+
 }
 function add_check(){
       //Check maximum number of input fields
@@ -326,7 +331,7 @@ function fill_loc(){
                 cnt++;
             });
             document.getElementById("id_waypoints").value =  string_stop;
-            console.log(string_stop)
+
          }
          return
 
