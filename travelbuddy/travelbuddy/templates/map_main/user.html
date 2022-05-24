@@ -56,7 +56,7 @@
             var maxField = 10; //Input fields increment limitation
             var addButton = $('.add_button'); //Add button selector
             var wrapper = $('.field_wrapper'); //Input field wrapper
-<!--        var fieldHTML = '<div><input type="text" placeholder="Stop" id="stop" name="field_name[]" value=""/><a href="javascript:void(0);" class="remove_button"><img src="remove-icon.png"/></a></div>'; //New input field html-->
+<!--        var fieldHTML = '<div><input type="text" placeholder="Stop" id="stop" value=""/><a href="javascript:void(0);" class="remove_button"><img src="remove-icon.png"/></a></div>'; //New input field html-->
             var x = 1; //Initial field counter is 1
 
 
@@ -65,7 +65,7 @@
                 //Check maximum number of input fields
                 if(x < maxField){
                     x++; //Increment field counter
-                    $(wrapper).append('<div><input type="text" class="stop" placeholder="Stop" id="'+ x +'" name="field_name[]" value=""/><a href="javascript:void(0);" class="remove_button"><img src="remove-icon.png"/></a></div>'); //Add field html
+                    $(wrapper).append('<div><input type="text" class="stop" placeholder="Stop" id="'+ x +'" value=""/><a href="javascript:void(0);" class="remove_button"><img src="remove-icon.png"/></a></div>'); //Add field html
                 }
             });
 
@@ -136,7 +136,7 @@
                              <br>
                              <input type="text" placeholder="Destination" id="end" name="autocomplete"/>
                              <br>
-                             <button type="button" class="loc_but" onclick="get_loc_org(); get_loc_dest();"></button>
+                             <button type="button" class="loc_but" onclick="get_loc_org(); get_loc_dest(); fill_loc(); call();"></button>
                             <br>
                         </p>
                     </div>
@@ -145,7 +145,7 @@
               <div class="row">
                   <div class="content-box-wrapper" style="height: 400px;width:90%; background:white ;margin-left: 5%">
                       <input type="text" placeholder="CheckBoxe's Name" id="check-name" name="check-name"/>
-                      <button type="button" onclick="add_check();"></button>
+                      <button type="button" onclick="add_check(); fill_btn_check();"></button>
                       <i class="fa-regular fa-xmark"></i>
 
                   </div>
@@ -158,7 +158,7 @@
               <div class="row">
                   <div class="button-center">
                         {% csrf_token %}
-                        {{form|crispy}}
+                        {{form.field.as_hidden|crispy}}
                         <input class="btn btn-primary btn-block" type="submit" value="Post">
                   </div>
               </div>
