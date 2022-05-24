@@ -160,7 +160,7 @@
               <div class="row">
                   <div class="button-center">
                         {% csrf_token %}
-                        {{form.field.as_hidden|crispy}}
+                        {{form|crispy}}
                         <input class="btn btn-primary btn-block" type="submit" value="Post">
                   </div>
               </div>
