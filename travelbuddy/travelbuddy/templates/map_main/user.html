@@ -104,7 +104,7 @@
     <body>
          <form method="POST" action="{% url 'user_map' %}">
               <div class="row">
-                  <input type="text" placeholder="Trip Title" id="title" name="Title"/>
+                  <input type="text" placeholder="Trip Title" id="title" value="{{history.title}}" name="Title"/>
               </div>
               <div class="row">
                 <div class="column" align="center" >
@@ -175,13 +175,15 @@
               </div>
 
               <div class="row">
-                  <textarea id="text" spellcheck='false' style="height:400px; width:90%; margin-left:5%; margin-top:2%;" value="{{history.journal}}"></textarea>
+                  <textarea id="text" spellcheck='false' style="height:400px; width:90%; margin-left:5%; margin-top:2%;">
+                    {{history.journal}}
+                  </textarea>
               </div>
 
               <div class="row">
                   <div class="button-center">
                         {% csrf_token %}
-                        {{form.field.as_hidden|crispy}}
+                        {{form|crispy}}
                         <input class="btn btn-primary btn-block" type="submit" value="Post">
                   </div>
               </div>
