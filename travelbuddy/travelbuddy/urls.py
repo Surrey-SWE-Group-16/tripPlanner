@@ -31,6 +31,7 @@ urlpatterns = [
     path('', include('map_main.urls')),
     path("ajax/get_maps/", get_maps, name='get_maps'),
     path("ajax/weather_api/", weather_api, name='weather_api')
+
 ]
 
 if settings.DEBUG:

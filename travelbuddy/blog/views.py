@@ -39,6 +39,7 @@ def post_detail(request, pk):
             instance.user = request.user
             instance.post = post
             instance.save()
+
             return redirect('blog-post-detail', pk=post.id)
     else:
         comment_form = CommentForm()
@@ -57,7 +58,7 @@ def post_edit(request, pk):
         form = PostUpdateForm(request.POST, instance=post)
         if form.is_valid():
             form.save()
-            return redirect('blog/post_detail', pk=post.id)
+            return redirect('blog-post-detail', pk=post.id)
     else:
         form = PostUpdateForm(instance=post)
     context = {

@@ -9,7 +9,6 @@ class PostModelForm(forms.ModelForm):
         fields = ('title', 'content')
 
 # post edit form
-
 class PostUpdateForm(forms.ModelForm):
     class Meta:
         model = PostModel

@@ -24,7 +24,7 @@ def user_map(request):
             instance.author = request.user
             instance.save()
             # blog url in blog urls
-            return redirect('blog-index')
+            return redirect('planner-log')
     else:
         form = MapModelForm()
 
@@ -37,6 +37,26 @@ def user_map(request):
     #
     # }
     return render(request, "map_main/user.html", {'form': form})
+
+# Create user travel log that redirects to User page
+def user_log(request):
+    maps = MapModel.objects.all()
+    print("map model ", maps)
+    context = {
+        'maps': maps
+    }
+
+    return render(request, 'map_main/log.html', context)
+
+
+def user_log_history(request, pk):
+    history = MapModel.objects.get(id=pk)
+    print("history", history)
+    context = {
+        'history': history
+    }
+    return render(request, 'map_main/user.html', context)
+    # return redirect('/User', context)
 
 
 def get_maps(request):
@@ -91,5 +111,5 @@ def location(request):
         'form': form,
     }
 
-    return render(request, 'planner/location.html', context)
+    return render(request, 'planner/log.html', context)
 

@@ -54,7 +54,6 @@ INSTALLED_APPS = [
     'crispy_forms',
     'weather',
     'corsheaders',
-    'travelbuddy',
     #'map_main',
 
 

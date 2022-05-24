@@ -84,7 +84,7 @@
     <body>
          <form method="POST" action="{% url 'user_map' %}">
               <div class="row">
-                  <input type="text" placeholder="Trip Title" id="title" name="Title" style=""/>
+                  <input type="text" placeholder="Trip Title" id="title" name="Title"/>
               </div>
               <div class="row">
                 <div class="column" align="center" >
@@ -127,16 +127,17 @@
                 <div class="media-content">
                     <div class="content">
                         <p>
-                             <div class="field_wrapper">
+                             <div class="col-md-3">
                                 <div>
-                                    <input type="text" placeholder="Origin" id="origin" name="autocomplete"/>
+                                    <input type="text" placeholder="Origin" id="origin" name="autocomplete" value="{{history.orig_loc}}"/>
                                     <a href="javascript:void(0);" class="add_button" title="Add field"><img src="add-icon.png"/></a>
                                 </div>
-                             </div>
-                             <br>
-                             <input type="text" placeholder="Destination" id="end" name="autocomplete"/>
-                             <br>
-                             <button type="button" class="loc_but" onclick="get_loc_org(); get_loc_dest();"></button>
+                                <div style="left: -10px; position:relative; margin-top: 3px">
+                                     <input type="text" placeholder="Destination" id="end" name="autocomplete" value="{{history.dest_loc}}"/>
+                                     <br>
+                                     <button type="button" class="loc_but" onclick="get_loc_org(); get_loc_dest();"></button>
+                                </div>
+                            </div>
                             <br>
                         </p>
                     </div>
@@ -144,15 +145,15 @@
               </div>
               <div class="row">
                   <div class="content-box-wrapper" style="height: 400px;width:90%; background:white ;margin-left: 5%">
-                      <input type="text" placeholder="CheckBoxe's Name" id="check-name" name="check-name"/>
-                      <button type="button" onclick="add_check();"></button>
-                      <i class="fa-regular fa-xmark"></i>
+                      <input type="text" placeholder="CheckBox's Name" id="check-name" name="check-name" value="{{history.check_item}}"/>
+                      <button type='button' onclick='add_check();'></button>
+                      <i class='fa-regular fa-xmark'></i>
 
                   </div>
               </div>
 
               <div class="row">
-                  <textarea id="text" spellcheck="false" style="height:400px; width:90%; margin-left:5%; margin-top:2%;"></textarea>
+                  <textarea id="text" spellcheck='false' style="height:400px; width:90%; margin-left:5%; margin-top:2%;" value="{{history.journal}}"></textarea>
               </div>
 
               <div class="row">
