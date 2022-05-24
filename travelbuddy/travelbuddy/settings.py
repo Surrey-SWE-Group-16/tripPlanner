@@ -26,6 +26,7 @@ CORS_ALLOWED_ORIGINS = [
     "https://example.com",
     "http://127.0.0.1:8000",
     "http://localhost:5000",
+
 ]
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
@@ -36,7 +37,7 @@ SECRET_KEY = 'django-insecure-v6d93mz2v=z+7aak#l*g3@&qxwy512)795*f(xbl&owr($_h3+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['0.0.0.0', 'localhost']
+# ALLOWED_HOSTS = ['0.0.0.0', 'localhost']
 
 # Application definition
 
