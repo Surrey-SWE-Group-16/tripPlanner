@@ -7,7 +7,8 @@ var directionsRenderer
 
 window.onload = ()=>{
 google = window.google;
-initMap()
+initMap();
+add_checks_to_wrapper();
 }
 function get_loc_org() {
     $.ajax(
@@ -25,7 +26,6 @@ function get_loc_org() {
         },
         success: function( data )
         {
-
             console.log("data is: ", data);
             la = data.results[0].geometry.location.lat;
             lo = data.results[0].geometry.location.lng;
@@ -346,4 +346,25 @@ function fill_btn_check(){
 
 function call(){
     calculateAndDisplayRoute(directionsService, directionsRenderer);
+}
+
+function add_checks_to_wrapper(){
+    let chk = document.getElementById("checks_values").value;
+    const obj = JSON.parse(chk);
+    console.log("json ", obj);
+    let cnt = 0;
+    let json_len = Object.keys(obj).length;
+    for(i = 1; i <= json_len; i++) {
+      console.log(obj[i]);
+      if(obj[i].checked == true){
+        $(".content-box-wrapper").append('<div id=""><input type="checkbox" name="check" id="'+i+'" checked onchange="fill_check(event)" value=""><label for="'+i+'" style="color: black;"> '+obj[i].label+'</label><a onclick="remove_check(this)" class="remove_button"><img src="remove-icon.png"/></a></div><br>');
+      }
+      else{
+        $(".content-box-wrapper").append('<div id=""><input type="checkbox" name="check" id="'+i+'" onchange="fill_check(event)" value=""><label for="'+i+'" style="color: black;"> '+obj[i].label+'</label><a onclick="remove_check(this)" class="remove_button"><img src="remove-icon.png"/></a></div><br>');
+      }
+
+    }
+    checkbox_counter = json_len + 1;
+
+
 }

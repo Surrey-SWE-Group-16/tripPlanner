@@ -126,28 +126,29 @@
               <div class="row" style="text-align: center">
                 <div class="media-content">
                     <div class="content">
-                             <div class="col-md-3">
-                                <div>
-                                    <input type="text" placeholder="Origin" id="origin" name="autocomplete" value="{{history.orig_loc}}"/>
-                                    <a href="javascript:void(0);" class="add_button" title="Add field"><img src="add-icon.png"/></a>
-                                </div>
-                                 <div style="left: -10px; position:relative; margin-top: 3px">
-                                     <input type="text" placeholder="Destination" id="end" name="autocomplete" value="{{history.dest_loc}}"/>
-                                 </div>
-                                <div>
-                                     <button type="button" class="loc_but" onclick="get_loc_org(); get_loc_dest();"
-                                             style="left: -10px;></button"></button>
-                                </div>
+                         <div class="col-md-3">
+                            <div>
+                                <input type="text" placeholder="Origin" id="origin" name="autocomplete" value="{{history.orig_loc}}"/>
+                                <a href="javascript:void(0);" class="add_button" title="Add field"><img src="add-icon.png"/></a>
                             </div>
-                            <br>
+                             <div style="left: -10px; position:relative; margin-top: 3px">
+                                 <input type="text" placeholder="Destination" id="end" name="autocomplete" value="{{history.dest_loc}}"/>
+                             </div>
+                            <div>
+                                 <button type="button" class="loc_but" onclick="get_loc_org(); get_loc_dest();"
+                                         style="left: -10px;></button"></button>
+                            </div>
+                         </div>
                     </div>
                 </div>
               </div>
               <div class="row">
                   <div class="content-box-wrapper" style="height: 400px;width:90%; background:white ;margin-left: 5%">
-                      <input type="text" placeholder="CheckBox's Name" id="check-name" name="check-name" value="{{history.check_item}}"/>
+                      <input type="text" placeholder="CheckBox's Name" id="check-name" name="check-name"/>
                       <button type="button" onclick="add_check(); fill_btn_check();"></button>
                       <i class="fa-regular fa-xmark"></i>
+                      <input type="hidden" id="checks_values" value="{{history.check_item}}" onchange="add_checks_to_wrapper(event)">
+
 
                   </div>
               </div>
