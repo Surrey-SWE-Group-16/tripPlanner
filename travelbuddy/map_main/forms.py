@@ -19,20 +19,7 @@ class MapModelForm(forms.ModelForm):
         fields = ('title', 'orig_loc', 'dest_loc', 'waypoints', 'check_item', 'journal', 'distance')    # always need to add comma after the field esp when there's one field.
 
 
-# class ChecklistModelForm(forms.ModelForm):
-#     class Meta:
-#         model = ChecklistModel
-#         fields = ('checklist',)
-#
-#
-# # Journal form
-# class JournalModelForm(forms.ModelForm):
-#     journal = forms.CharField(label='', widget=forms.TextInput(attrs={'placeholder': 'Add your journal here', 'rows': 4}
-#                                                                ))
-#
-#     class Meta:
-#         model = JournalModel
-#         fields = ('journal',)
+
 
 
 
