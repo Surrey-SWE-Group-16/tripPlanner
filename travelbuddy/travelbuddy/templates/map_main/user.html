@@ -2,8 +2,7 @@
     {% load crispy_forms_tags %}
     {% block content %}
     <head xmlns="http://www.w3.org/1999/html" xmlns="">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"></script >
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
      {% load static %}
 
 
@@ -65,17 +64,38 @@
                 //Check maximum number of input fields
                 if(x < maxField){
                     x++; //Increment field counter
-                    $(wrapper).append('<div><input type="text" class="stop" placeholder="Stop" id="'+ x +'" value=""/><a href="javascript:void(0);" class="remove_button"><img src="remove-icon.png"/></a></div>'); //Add field html
+                    $(".wrapper").append('<div><input type="text" class="stop" placeholder="Stop" id="'+ x +'" value=""/><a href="javascript:void(0);" class="remove_button"><img src="remove-icon.png"/></a></div>'); //Add field html
                 }
             });
 
             //Once remove button is clicked
-            $(wrapper).on('click', '.remove_button', function(e){
+            $(".wrapper").on('click', '.remove_button', function(e){
                 e.preventDefault();
                 console.log($(this).parent('div'))
                 $(this).parent('div').remove(); //Remove field html
                 x--; //Decrement field counter
             });
+            function myFunction () {
+
+                const box = document.getElementById('weather_title');
+
+                if (box.childNodes.length === 0) {
+
+                } else {
+
+                  const today = new Date();
+                  let h = today.getHours();
+                  let m = today.getMinutes();
+                  let s = today.getSeconds();
+                  document.getElementById('update').innerHTML =  "Last update was at: " + h + ":" + m + ":" + s;
+                }
+                }
+
+                if (1==1) {
+                    var interval = setInterval(function () {
+                        myFunction();
+                    }, 10000);
+                }
         });
     </script>
 </head>
@@ -84,7 +104,7 @@
     <body>
          <form method="POST" action="{% url 'user_map' %}">
               <div class="row">
-                  <input type="text" placeholder="Trip Title" id="title" name="Title"/>
+                  <input type="text" placeholder="Trip Title" id="title" value="{{history.title}}" name="Title"/>
               </div>
               <div class="row">
                 <div class="column" align="center" >
@@ -126,19 +146,20 @@
               <div class="row" style="text-align: center">
                 <div class="media-content">
                     <div class="content">
-                         <div class="col-md-3">
-                            <div>
-                                <input type="text" placeholder="Origin" id="origin" name="autocomplete" value="{{history.orig_loc}}"/>
-                                <a href="javascript:void(0);" class="add_button" title="Add field"><img src="add-icon.png"/></a>
+                             <div class="col-md-3">
+                                <div class="wrapper">
+                                    <input type="text" placeholder="Origin" id="origin" name="autocomplete" value="{{history.orig_loc}}"/>
+                                    <a href="javascript:void(0);" class="add_button" title="Add field"><img src="add-icon.png"/></a>
+                                </div>
+                                 <div style="left: -10px; position:relative; margin-top: 3px">
+                                     <input type="text" placeholder="Destination" id="end" name="autocomplete" value="{{history.dest_loc}}"/>
+                                 </div>
+                                <div>
+                                     <button type="button" class="loc_but" onclick="get_loc_org(); get_loc_dest(); call(); fill_loc()"
+                                             style="left: -10px;></button"></button>
+                                </div>
                             </div>
-                             <div style="left: -10px; position:relative; margin-top: 3px">
-                                 <input type="text" placeholder="Destination" id="end" name="autocomplete" value="{{history.dest_loc}}"/>
-                             </div>
-                            <div>
-                                 <button type="button" class="loc_but" onclick="get_loc_org(); get_loc_dest();"
-                                         style="left: -10px;></button"></button>
-                            </div>
-                         </div>
+                            <br>
                     </div>
                 </div>
               </div>
@@ -154,7 +175,9 @@
               </div>
 
               <div class="row">
-                  <textarea id="text" spellcheck='false' style="height:400px; width:90%; margin-left:5%; margin-top:2%;" value="{{history.journal}}"></textarea>
+                  <textarea id="text" spellcheck='false' style="height:400px; width:90%; margin-left:5%; margin-top:2%;">
+                    {{history.journal}}
+                  </textarea>
               </div>
 
               <div class="row">

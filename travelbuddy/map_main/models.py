@@ -11,6 +11,7 @@ class MapModel(models.Model):
     waypoints = models.TextField()
     check_item = models.TextField()
     journal = models.TextField()
+    distance = models.IntegerField(default=0)
     date_created = models.DateTimeField(auto_now_add=True)
     author = models.ForeignKey(User, on_delete=models.CASCADE)  # whenever a user is deleted, deletes everything related to that user
 

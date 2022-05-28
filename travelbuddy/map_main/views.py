@@ -38,16 +38,20 @@ def user_map(request):
     # }
     return render(request, "map_main/user.html", {'form': form})
 
+
 # Create user travel log that redirects to User page
+# login required to view the journal that includes logs
 @login_required
 def user_log(request):
     maps = MapModel.objects.all()
     print("map model ", maps)
+
     context = {
         'maps': maps
     }
 
     return render(request, 'map_main/log.html', context)
+
 
 # Direct users to their user db when click on their old logs
 @login_required
@@ -58,7 +62,17 @@ def user_log_history(request, pk):
         'history': history
     }
     return render(request, 'map_main/user.html', context)
-    # return redirect('/User', context)
+
+
+# log can only be deleted when logged in
+@login_required
+def log_delete(request, pk):
+    history = MapModel.objects.get(id=pk)
+    print("items are ", history)
+    # if request.method == 'POST':
+    history.delete()
+
+    return redirect('planner-log')
 
 
 def get_maps(request):
@@ -116,14 +130,3 @@ def location(request):
     return render(request, 'planner/log.html', context)
 
 
-# # log can only be deleted when logged in
-# @login_required
-# def log_delete(request, pk):
-#     history = MapModel.objects.get(id=pk)
-#     if request.method == 'POST':
-#         history.delete()
-#         return redirect('planner-log-history')
-#     context = {
-#         'history': history
-#     }
-#     return render(request, 'blog/post_delete.html', context)
