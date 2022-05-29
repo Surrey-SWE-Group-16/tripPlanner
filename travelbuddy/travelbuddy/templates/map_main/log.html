@@ -19,6 +19,7 @@
                 </div>
             </div>
             {% for map in maps %}
+<!--            show only the logs of the logged in user/author -->
             {% if map.author == request.user %}
             <div class="card-group">
                 <div class="card shadow my-2">
@@ -31,23 +32,23 @@
                 </div>
                 <div class="card shadow my-2" style="max-width: 10rem;">
                     <div class="card-body my-5 mx-4" style="test-align: right">
-                        <button>
-                            <a href="{% url 'planner-log-history' map.id %}">
-                            <span class="material-symbols-outlined">edit</span>
-                            </a>
-                        </button>
-                        <button>
-                            <a href="{% url 'delete-log' map.id %}">
-                            <span class="material-symbols-outlined">delete</span>
-                            </a>
-                        </button>
+                        <div class="row">
+                            <button>
+                                <a href="{% url 'planner-log-history' map.id %}">
+                                <span class="material-symbols-outlined">edit</span>
+                                </a>
+                            </button>
+                            <button>
+                                <a href="{% url 'delete-log' map.id %}">
+                                <span class="material-symbols-outlined">delete</span>
+                                </a>
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
             {% endif %}
             {% endfor %}
-
-        </div>
     </div>
 </div>
 {% endblock %}

@@ -48,15 +48,25 @@
 <!--                      template tag  -->
                         {% for comment in post.comment_set.all %}
                         <p class="text-justify">
-                            {{ comment.content }}
+                          <div class="row">
+                            <div class="col-md-2">
+                                <img class="img-thumbnail" src="{{ comment.user.profilemodel.image.url }}" alt="profile-img">
 
-                            {% if comment.user == request.user %}
-<!--                            buttons for deleting  -->
-                              <form action="{% url 'blog-comment-delete' comment.id %}" method="POST">
-                                {% csrf_token %}
-                                <input class="btn btn-danger float-right btn-sm" type="submit" value="Delete">
-                              </form>
-                            {% endif %}
+                            </div>
+
+                            <div class="col-md-10" style="display: flex; flex-direction: column;">
+                                <h5>{{comment.user}}</h5>
+                                <p>{{ comment.content }}</p>
+
+                                {% if comment.user == request.user %}
+    <!--                            buttons for deleting  -->
+                                  <form action="{% url 'blog-comment-delete' comment.id %}" method="POST">
+                                    {% csrf_token %}
+                                    <input class="btn btn-danger float-right btn-sm" type="submit" value="Delete">
+                                  </form>
+                                {% endif %}
+                            </div>
+                          </div>
                         </p>
                         <hr>
                         {% endfor %}
