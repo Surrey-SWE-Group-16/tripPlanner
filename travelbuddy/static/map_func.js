@@ -355,7 +355,9 @@ function call(){
 
 function add_checks_to_wrapper(){
     let chk = document.getElementById("checks_values").value;
-    const obj = JSON.parse(chk);
+    try {
+        const obj = JSON.parse(chk);
+    } catch {return;}
     console.log("json ", obj);
     let cnt = 0;
     let json_len = Object.keys(obj).length;

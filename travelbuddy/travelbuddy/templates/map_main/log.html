@@ -17,7 +17,6 @@
             document.getElementById("id_tot_dist").textContent =  dist_tot;
         };
  </script>
-
 <div class="container">
     <div class="row mt-5 pt-3">
         <div class="col-md-8">
@@ -36,15 +35,37 @@
                 </div>
             </div>
             {% for map in maps %}
-            <div class="card shadow my-3">
-                <div class="card-body">
-                    <h5><a href="{% url 'planner-log-history' map.id %}">Trip: {{map.title}}</a></h5>
-                    <hr>
-                    <p>origin: {{map.orig_loc}}</p>
-                    <p>destination: {{map.dest_loc}}</p>
-                    distance: <p class="dist">{{map.distance}}</p>
+<!--            show only the logs of the logged in user/author -->
+            {% if map.author == request.user %}
+            <div class="card-group">
+                <div class="card shadow my-2">
+                    <div class="card-body">
+                        <div class="row" style="margin: 0;">
+<!--                            title-->
+                            <h5><a href="{% url 'planner-log-history' map.id %}">Trip: {{map.title}}</a></h5>
+                            <div class="col md-10" style="text-align: right;">
+<!--                                edit button-->
+                                <button>
+                                    <a href="{% url 'planner-log-history' map.id %}">
+                                    <span class="material-symbols-outlined">edit</span>
+                                    </a>
+                                </button>
+<!--                                delete button-->
+                                <button>
+                                    <a href="{% url 'delete-log' map.id %}">
+                                    <span class="material-symbols-outlined">delete</span>
+                                    </a>
+                                </button>
+                            </div>
+                        </div>
+                        <hr>
+                        <p>origin: {{map.orig_loc}}</p>
+                        <p>destination: {{map.dest_loc}}</p>
+                        distance: <p class="dist">{{map.distance}}</p>
+                    </div>
                 </div>
             </div>
+            {% endif %}
             {% endfor %}
         </div>
 
