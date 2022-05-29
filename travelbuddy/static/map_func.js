@@ -26,7 +26,7 @@ function get_loc_org() {
         },
         success: function( data )
         {
-            console.log("data is: ", data);
+
             la = data.results[0].geometry.location.lat;
             lo = data.results[0].geometry.location.lng;
             address = data.results[0].formatted_address;
@@ -239,7 +239,7 @@ function weather_api(lo, la, address){
           (document.getElementById("origin")).addEventListener(
               "change",
               ()=>{
-
+                console.log(document.getElementById("origin").value);
                 document.getElementById("id_orig_loc").value = document.getElementById("origin").value
               }
 
@@ -269,11 +269,15 @@ function weather_api(lo, la, address){
 
 
 
+
  }
  function calculateAndDisplayRoute(directionsService,directionsRenderer){
 
   const waypts = [];
   const elementList = document.querySelectorAll(".stop");
+  const e = document.getElementById("mode");
+
+  const selectedMode = e.options[e.selectedIndex].value;
 
   elementList.forEach(e => {
         waypts.push({
@@ -282,7 +286,7 @@ function weather_api(lo, la, address){
         });
   });
 
-   console.log("map called!");
+
 
   directionsService
     .route({
@@ -293,7 +297,7 @@ function weather_api(lo, la, address){
         query: (document.getElementById('end').value),
       },
       waypoints: waypts,
-      travelMode: google.maps.TravelMode.DRIVING,
+      travelMode: google.maps.TravelMode[selectedMode],
     })
     .then((response) => {
       directionsRenderer.setDirections(response);
@@ -358,11 +362,11 @@ function add_checks_to_wrapper(){
     try {
         const obj = JSON.parse(chk);
     } catch {return;}
-    console.log("json ", obj);
+
     let cnt = 0;
     let json_len = Object.keys(obj).length;
     for(i = 1; i <= json_len; i++) {
-      console.log(obj[i]);
+
       if(obj[i].checked == true){
         $(".content-box-wrapper").append('<div id=""><input type="checkbox" name="check" id="'+i+'" checked onchange="fill_check(event)" value=""><label for="'+i+'" style="color: black;"> '+obj[i].label+'</label><a onclick="remove_check(this)" class="remove_button"><img src="remove-icon.png"/></a></div><br>');
       }
@@ -375,3 +379,10 @@ function add_checks_to_wrapper(){
 
 
 }
+function no_dist(){
+    if( document.getElementById("id_distance").value == ""){
+        window.alert("Please ensure you have clicked the route button");
+    }
+    return
+}
+

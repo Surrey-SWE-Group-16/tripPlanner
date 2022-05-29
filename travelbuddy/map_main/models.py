@@ -8,9 +8,9 @@ class MapModel(models.Model):
     title = models.CharField(max_length=50)
     orig_loc = models.CharField(max_length=50)
     dest_loc = models.CharField(max_length=50)
-    waypoints = models.TextField()
-    check_item = models.TextField()
-    journal = models.TextField()
+    waypoints = models.TextField(blank=True)
+    check_item = models.TextField(blank=True)
+    journal = models.TextField(blank=True)
     distance = models.IntegerField(default=0)
     date_created = models.DateTimeField(auto_now_add=True)
     author = models.ForeignKey(User, on_delete=models.CASCADE)  # whenever a user is deleted, deletes everything related to that user

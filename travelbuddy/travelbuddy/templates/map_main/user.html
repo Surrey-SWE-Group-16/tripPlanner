@@ -55,7 +55,6 @@
             var maxField = 10; //Input fields increment limitation
             var addButton = $('.add_button'); //Add button selector
             var wrapper = $('.field_wrapper'); //Input field wrapper
-<!--        var fieldHTML = '<div><input type="text" placeholder="Stop" id="stop" value=""/><a href="javascript:void(0);" class="remove_button"><img src="remove-icon.png"/></a></div>'; //New input field html-->
             var x = 1; //Initial field counter is 1
 
 
@@ -75,27 +74,7 @@
                 $(this).parent('div').remove(); //Remove field html
                 x--; //Decrement field counter
             });
-            function myFunction () {
 
-                const box = document.getElementById('weather_title');
-
-                if (box.childNodes.length === 0) {
-
-                } else {
-
-                  const today = new Date();
-                  let h = today.getHours();
-                  let m = today.getMinutes();
-                  let s = today.getSeconds();
-                  document.getElementById('update').innerHTML =  "Last update was at: " + h + ":" + m + ":" + s;
-                }
-                }
-
-                if (1==1) {
-                    var interval = setInterval(function () {
-                        myFunction();
-                    }, 10000);
-                }
         });
     </script>
 </head>
@@ -151,12 +130,19 @@
                                     <input type="text" placeholder="Origin" id="origin" name="autocomplete" value="{{history.orig_loc}}"/>
                                     <a href="javascript:void(0);" class="add_button" title="Add field"><img src="add-icon.png"/></a>
                                 </div>
-                                 <div style="left: -10px; position:relative; margin-top: 3px">
+                                <div style="left: -10px; position:relative; margin-top: 3px">
                                      <input type="text" placeholder="Destination" id="end" name="autocomplete" value="{{history.dest_loc}}"/>
-                                 </div>
+                                </div>
                                 <div>
-                                     <button type="button" class="loc_but" onclick="get_loc_org(); get_loc_dest(); call(); fill_loc()"
-                                             style="left: -10px;></button"></button>
+                                     <select id="mode" placeholder="Travel Mode">
+                                        <option value="DRIVING">Driving</option>
+                                        <option value="WALKING">Walking</option>
+                                        <option value="BICYCLING">Bicycling</option>
+                                        <option value="TRANSIT">Transit</option>
+                                     </select>
+                                </div>
+                                <div>
+                                     <button type="button" class="loc_but" onclick="get_loc_org(); get_loc_dest(); call(); fill_loc()" style="left: -10px;></button"></button>
                                 </div>
                             </div>
                             <br>
@@ -183,8 +169,8 @@
               <div class="row">
                   <div class="button-center">
                         {% csrf_token %}
-                        {{form|crispy}}
-                        <input class="btn btn-primary btn-block" type="submit" value="Post">
+                        <div style="display:none">{{form|crispy}}</div>
+                        <input class="btn btn-primary btn-block" type="submit" value="Post" onclick="no_dist()">
                   </div>
               </div>
 

@@ -4,13 +4,15 @@
 {% block content %}
  <script type="text/javascript">
         window.onload = function() {
-            let dist_tot = 0
+            let dist_tot = 0;
             let cnt = 0;
             const dist_quer = document.querySelectorAll(".dist");
-            console.log("value", dist_quer)
+            console.log("value", dist_quer);
             dist_quer.forEach(d => {
-                console.log("v ", d.innerHTML)
+                console.log("v ", d.innerHTML);
                 dist_tot = dist_tot+parseInt(d.innerHTML);
+                d.innerHTML = parseInt(d.innerHTML)/1000;
+                d.parentElement.style.display = 'block';
             });
             console.log("dist ", dist_tot)
             dist_tot = dist_tot/1000;
@@ -26,7 +28,7 @@
                         <div class="card-body" style="text-align: center">
                             <span class="title" id="dist_tit">Total Distance of all your trips:</span>
                             <br>
-                            <a id="id_tot_dist"></a>KM
+                            <span id="id_tot_dist"></span>km
                         </div>
                     </div>
                     <a class="btn" href="{% url 'user_map' %}">
@@ -61,7 +63,9 @@
                         <hr>
                         <p>origin: {{map.orig_loc}}</p>
                         <p>destination: {{map.dest_loc}}</p>
-                        distance: <p class="dist">{{map.distance}}</p>
+                        <div style="display:none">
+                            distance: <span class="dist">{{map.distance}}</span> km
+                        </div>
                     </div>
                 </div>
             </div>
