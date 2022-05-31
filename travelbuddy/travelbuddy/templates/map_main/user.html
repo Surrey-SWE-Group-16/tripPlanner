@@ -48,6 +48,108 @@
         .loc_but{
             padding: 15px 30px;
         }
+        .map-select-content{
+            width: 60%;
+            margin: auto;
+        }
+        .map-select-content select{
+            width: 100%;
+        }
+        .map-select-content button{
+            width: 100%;
+            padding: 0;
+        }
+        .map-wrapper input{
+            padding: 5px;
+            background: none;
+            border: 1px solid #0ce3ac;
+            color: #0ce3ac;
+            text-align: center;
+        }
+
+        .location-origin{
+            margin-bottom: 3px;
+        }
+        .icon-btn{
+            text-decoration: none;
+            border: 1px solid;
+            width: 25px;
+            height: 25px;
+            display: inline-block;
+            transition:all 0.2s;
+        }
+        .icon-btn:hover{
+            background: #0ce3ac;
+            color: black;
+        }
+        .icon-check{
+            text-decoration: none;
+            border: 1px solid;
+            width: 25px;
+            height: 25px;
+            display: inline-block;
+            transition:all 0.2s;
+            background: #375a7f;
+            color: #fff;
+        }
+        .icon-check:hover{
+            background: black;
+            border: 1px solid
+            color: #fff;
+        }
+        .stop{
+            margin-right: 3px;
+        }
+        .location-destination{
+            margin-left: -7px;
+        }
+        .trip-title{
+            padding: 10px;
+            border: none;
+            border-bottom: 2px solid;
+            background: none;
+            color: #0ce3ac;
+            text-align: center;
+            margin-bottom:5px;
+        }
+        .map-wrapper select{
+            background: none;
+            border: 1px solid #0ce3ac;
+            color: #0ce3ac;
+        }
+        .journal-add{
+            padding: 20px;
+            text-align: center;
+            width: 100%;
+        }
+        .journal-add-btn{
+            width: 50% !important;
+            margin: auto;
+        }
+        .button-center{
+            width: 50%;
+            margin: 5px auto 25px;
+        }
+        h4{
+            width: 100%;
+        }
+        form{
+            text-align:center;
+        }
+        .weather-container{
+            position: absolute;
+            top: 5%;
+            left: 50%;
+            transform: translate(-50%, 0%);
+            width: 100%;
+        }
+
+        .weather-container .weather-info{
+            padding:5%;
+            background:#333;
+            width: 50%;
+            margin: 5px auto 0;
+        }
 
    </style>
     <script type="text/javascript">
@@ -63,7 +165,7 @@
                 //Check maximum number of input fields
                 if(x < maxField){
                     x++; //Increment field counter
-                    $(".wrapper").append('<div><input type="text" class="stop" placeholder="Stop" id="'+ x +'" value=""/><a href="javascript:void(0);" class="remove_button"><img src="remove-icon.png"/></a></div>'); //Add field html
+                     $(".wrapper").append('<div><input type="text" class="stop" placeholder="Stop" id="'+ x +'" value=""/><a href="javascript:void(0);" class="remove_button"><span class="icon-btn">-</span></a></div>'); //Add field html
                 }
             });
 
@@ -83,18 +185,38 @@
 
     <body>
          <form method="POST" action="{% url 'user_map' %}">
-              <div class="row">
-                  <input type="text" placeholder="Trip Title" id="title" value="{{history.title}}" name="Title"/>
-              </div>
-              <div class="row">
-                <div class="column" align="center" >
-                      <!--Adds the Google Maps ma-->
-
-                      <div id="googledivMap"></div>
+              <input type="text" class="trip-title" placeholder="Trip Title" id="title" value="{{history.title}}" name="Title"/>
+              <div class="row" style="margin: 0; text-align: center;">
+                <div class="col-md-8 map-wrapper">
+                    <!--Adds the Google Maps ma-->
+                    <div id="googledivMap"></div>
+                    <div class="media-content">
+                        <div class="content map-select-content">
+                                <div class="wrapper" style="margin-top: 3px;">
+                                    <input type="text" class="location-origin" placeholder="Origin" id="origin" name="autocomplete" value="{{history.orig_loc}}"/>
+                                    <a href="javascript:void(0);" class="add_button" title="Add field"><span class="icon-btn">+</span></a>
+                                </div>
+                                <div style="left: -10px; position:relative; margin-top: 3px">
+                                        <input type="text" class="location-destination" placeholder="Destination" id="end" name="autocomplete" value="{{history.dest_loc}}"/>
+                                </div>
+                                <div>
+                                        <select class="form-select" id="mode" placeholder="Travel Mode" style="margin-top: 3px; padding: 5px;">
+                                            <option value="DRIVING">Driving</option>
+                                            <option value="WALKING">Walking</option>
+                                            <option value="BICYCLING">Bicycling</option>
+                                            <option value="TRANSIT">Transit</option>
+                                        </select>
+                                </div>
+                                <div>
+                                        <button type="button" class="btn btn-primary btn-block loc_but" onclick="time()" style="left: -10px; margin-top: 3px; color:black;">Calculate</button>
+                                </div>
+                                <br>
+                        </div>
+                    </div>
                 </div>
-                <div class="column">
-                    <div class="row">
-                        <div class="media-content">
+                <div class="col-md-4">
+                    <div class="weather-container">
+                        <div class="media-content weather-info">
                             <div class="content">
                                 <p>
                                     <span class="title" id="weather_title"></span>
@@ -106,9 +228,7 @@
                                 </p>
                             </div>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="media-content">
+                        <div class="media-content weather-info">
                             <div class="content">
                                 <p>
                                     <span class="title" id="weather_title2"></span>
@@ -123,46 +243,19 @@
                     </div>
                 </div>
               </div>
-              <div class="row" style="text-align: center">
-                <div class="media-content">
-                    <div class="content">
-                             <div class="col-md-3">
-                                <div class="wrapper">
-                                    <input type="text" placeholder="Origin" id="origin" name="autocomplete" value="{{history.orig_loc}}"/>
-                                    <a href="javascript:void(0);" class="add_button" title="Add field"><img src="add-icon.png"/></a>
-                                </div>
-                                <div style="left: -10px; position:relative; margin-top: 3px">
-                                     <input type="text" placeholder="Destination" id="end" name="autocomplete" value="{{history.dest_loc}}"/>
-                                </div>
-                                <div>
-                                     <select id="mode" placeholder="Travel Mode" style="color:black">
-                                        <option value="DRIVING">Driving</option>
-                                        <option value="WALKING">Walking</option>
-                                        <option value="BICYCLING">Bicycling</option>
-                                        <option value="TRANSIT">Transit</option>
-                                     </select>
-                                </div>
-                                <div>
-                                     <button type="button" class="loc_but" onclick="time()" style="left: -10px;></button"></button>
-                                </div>
-                            </div>
-                            <br>
-                    </div>
-                </div>
-              </div>
-              <div class="row">
+              <div class="row" style="text-align: center;">
+                  <h4>Checklist Entries</h4>
                   <div class="content-box-wrapper" style="height: 400px;width:90%; background:white ;margin-left: 5%">
-                      <input type="text" placeholder="CheckBox's Name" id="check-name" name="check-name"/>
-                      <button type="button" onclick="add_check(); fill_btn_check();"></button>
+                      <input class="journal-add" type="text" placeholder="Add Checklist Entry" id="check-name" name="check-name"/>
+                      <button class="btn btn-primary btn-block journal-add-btn" type="button" onclick="add_check(); fill_btn_check();">+</button>
                       <i class="fa-regular fa-xmark"></i>
                       <input type="hidden" id="checks_values" value="{{history.check_item}}" onchange="add_checks_to_wrapper(event)">
-
-
                   </div>
               </div>
 
-              <div class="row">
-                  <textarea id="text" spellcheck='false' style="height:400px; width:90%; margin-left:5%; margin-top:2%;">
+              <div class="row" style="text-align: center;">
+                <h4>Journal Entries</h4>
+                  <textarea id="text" spellcheck='false' style="height:400px; width:90%; margin-left:5%;">
                     {{history.journal}}
                   </textarea>
               </div>
@@ -171,7 +264,7 @@
                   <div class="button-center">
                         {% csrf_token %}
                         <div style="display:none">{{form|crispy}}</div>
-                        <input class="btn btn-primary btn-block" type="submit" value="Post" onclick="no_dist()">
+                        <input class="btn btn-primary btn-block" type="submit" value="Post" onclick="no_dist()" style="margin-top:2%; margin-bottom:2%;">
                   </div>
               </div>
 
