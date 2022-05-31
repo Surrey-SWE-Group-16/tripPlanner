@@ -10,6 +10,7 @@ google = window.google;
 initMap();
 add_checks_to_wrapper();
 }
+
 function get_loc_org() {
     $.ajax(
     {
@@ -385,4 +386,20 @@ function no_dist(){
     }
     return
 }
+
+var myTimeout;
+
+function time() {
+
+    clearTimeout(myTimeout);
+
+    get_loc_org();
+    get_loc_dest();
+    call();
+    fill_loc();
+    console.log("hey Im here")
+
+    myTimeout = setTimeout(time, 60000);
+}
+
 

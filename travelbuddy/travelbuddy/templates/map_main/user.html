@@ -75,6 +75,7 @@
                 x--; //Decrement field counter
             });
 
+
         });
     </script>
 </head>
@@ -134,7 +135,7 @@
                                      <input type="text" placeholder="Destination" id="end" name="autocomplete" value="{{history.dest_loc}}"/>
                                 </div>
                                 <div>
-                                     <select id="mode" placeholder="Travel Mode">
+                                     <select id="mode" placeholder="Travel Mode" style="color:black">
                                         <option value="DRIVING">Driving</option>
                                         <option value="WALKING">Walking</option>
                                         <option value="BICYCLING">Bicycling</option>
@@ -142,7 +143,7 @@
                                      </select>
                                 </div>
                                 <div>
-                                     <button type="button" class="loc_but" onclick="get_loc_org(); get_loc_dest(); call(); fill_loc()" style="left: -10px;></button"></button>
+                                     <button type="button" class="loc_but" onclick="time()" style="left: -10px;></button"></button>
                                 </div>
                             </div>
                             <br>
