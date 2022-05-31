@@ -310,7 +310,7 @@ function weather_api(lo, la, address){
 }
 function add_check(){
       //Check maximum number of input fields
-      $(".content-box-wrapper").append('<div id=""><input type="checkbox" name="check" id="'+checkbox_counter+'" onchange="fill_check(event)" value=""><label for="'+checkbox_counter+'" style="color: black;"> '+document.getElementById('check-name').value+'</label><a onclick="remove_check(this)" class="remove_button"><img src="remove-icon.png"/></a></div><br>'); //Add field html
+      $(".content-box-wrapper").append('<div id=""><input type="checkbox" name="check" id="'+checkbox_counter+'" onchange="fill_check(event)" value=""><label for="'+checkbox_counter+'" style="color: black;"> '+document.getElementById('check-name').value+'</label><a onclick="remove_check(this)" class="remove_button"><span class="icon-check">-</span></a></div><br>'); //Add field html
 
       checkbox_counter++; //Increment field counter
 };
@@ -369,10 +369,10 @@ function add_checks_to_wrapper(){
     for(i = 1; i <= json_len; i++) {
 
       if(obj[i].checked == true){
-        $(".content-box-wrapper").append('<div id=""><input type="checkbox" name="check" id="'+i+'" checked onchange="fill_check(event)" value=""><label for="'+i+'" style="color: black;"> '+obj[i].label+'</label><a onclick="remove_check(this)" class="remove_button"><img src="remove-icon.png"/></a></div><br>');
+        $(".content-box-wrapper").append('<div id=""><input type="checkbox" name="check" id="'+i+'" checked onchange="fill_check(event)" value=""><label for="'+i+'" style="color: black;"> '+obj[i].label+'</label><a onclick="remove_check(this)" class="remove_button"><span class="icon-btn">-</span></a></div><br>');
       }
       else{
-        $(".content-box-wrapper").append('<div id=""><input type="checkbox" name="check" id="'+i+'" onchange="fill_check(event)" value=""><label for="'+i+'" style="color: black;"> '+obj[i].label+'</label><a onclick="remove_check(this)" class="remove_button"><img src="remove-icon.png"/></a></div><br>');
+        $(".content-box-wrapper").append('<div id=""><input type="checkbox" name="check" id="'+i+'" onchange="fill_check(event)" value=""><label for="'+i+'" style="color: black;"> '+obj[i].label+'</label><a onclick="remove_check(this)" class="remove_button"><span class="icon-btn">-</span></a></div><br>');
       }
 
     }
